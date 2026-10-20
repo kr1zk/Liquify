@@ -31,7 +31,7 @@
 - Modern, rounded UI
 - And much more!
 
-
+***⚠️IMPORTANT: TO MAKE YOUR THEME WORK PERFECTLY, YOU NEED TO INSTALL LIQUID LYRICS FROM SPICETIFY MARKETPLACE, OR DIRECTLY FROM [LIQUIFY LYRICS](https://github.com/NMWplays/Liquid-Lyrics) GITHUB.***
 
 ## Theme screenshots
 
