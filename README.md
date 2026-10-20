@@ -33,6 +33,8 @@
 
 ***⚠️IMPORTANT: TO MAKE YOUR THEME WORK PERFECTLY, YOU NEED TO INSTALL LIQUID LYRICS FROM SPICETIFY MARKETPLACE, OR DIRECTLY FROM [LIQUIFY LYRICS](https://github.com/NMWplays/Liquid-Lyrics) GITHUB.***
 
+<sub> these steps are not necessary, if you already have liquid lyrics installed</sub>
+
 ## Theme screenshots
 
 <details>
