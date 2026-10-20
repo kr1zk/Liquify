@@ -7152,7 +7152,24 @@ ${DISC}::after {
   var STYLE_ID8 = "liquify-home-layout-style";
   var HOME_LAYOUT_KEY = "liquify-home-layout";
   function updateHomeLayoutCss(on) {
-    const css = on ? ".main-home-content section { padding: 1rem; gap: .5rem; box-shadow: var(--liquify-shadow); border-radius: 20px; }.main-card-cardContainer, .LXxEtdyreLg2dh0C { height: calc(100% - 1px); }.XtiGtrj_ysgd8Bmv { --margin-start: 0px; --margin-end: 0px; }" : ".main-home-content section { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; }";
+    const css = on ? `
+.main-home-content section {
+  padding: 1rem;
+  gap: .5rem;
+  box-shadow: var(--liquify-shadow);
+  border-radius: 20px;
+}
+.main-home-content .main-card-cardContainer,
+.main-home-content .LXxEtdyreLg2dh0C { height: calc(100% - 1px); }
+/* Spotify's edge-to-edge carousel uses negative margins and matching grid
+   padding. Reset both inside the inset glass shelf, keeping its native scroller. */
+.main-home-content section[data-shelf="carousel"] > div:has([data-carousel-item]) {
+  --margin-start: 0px;
+  --margin-end: 0px;
+  --margin: 0px;
+  min-width: 0;
+}
+` : ".main-home-content section { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: none !important; }";
     updateStyle(STYLE_ID8, css);
   }
   function applyHomeLayout(mode) {
