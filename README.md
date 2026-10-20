@@ -13,7 +13,7 @@
 </div>
 
 > **Originally created by [NMW](https://github.com/NMWplays).**
-> This community fork, maintained by [kr1zk](https://github.com/kr1zk), adds local video backgrounds and interface fixes for Spotify 1.3.6.
+> This community fork, maintained by [kr1zk](https://github.com/kr1zk), adds local video backgrounds and interface fixes for Spotify 1.3.6.1921.g7086c071a617.
 > Visit the [original Liquify repository](https://github.com/NMWplays/Liquify) for NMW's work.
 
 
