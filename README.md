@@ -81,6 +81,9 @@ You need the **Spotify desktop app** and [Spicetify](https://spicetify.app/). Th
    ```shell
    spicetify config current_theme Liquify-main
    spicetify apply
+   
+   spicetify config overwrite_assets 1 (required for video background support)
+   spicetify apply
    ```
 
 Open **Liquify Settings** in Spotify to customize the theme.
