@@ -23,6 +23,7 @@
     ['[data-testid="settings-page"]', 'x-settings-container'],
     ['[data-testid="settings-page"] > div:has(h2):has([data-settings-row])', 'x-settings-section'],
     ['[data-testid="settings-page"] select', 'main-dropDown-dropDown'],
+    ['[data-testid="settings-page"] div:has(> [role="radiogroup"] input[type="radio"][value="100"])', 'liquify-zoom-controls'],
     ['[data-testid="CoverSlotCollapsed__container"]', 'main-coverSlotCollapsed-container'],
     ['[data-testid="player-controls"]', 'player-controls'],
     ['[data-testid="CoverSlotCollapsed__container"] [data-testid="cover-art-button"]', 'main-nowPlayingWidget-coverArtContainer'],
@@ -49,6 +50,7 @@
     ['[data-testid="home-page"]', 'liquify-home-page'],
     ['[data-testid="home-page"]', 'main-home-content'],
     ['#context-menu > div:has(> [role="menu"])', 'liquify-popup-surface'],
+    ['#context-menu:has(> [role="menu"])', 'liquify-popup-surface'],
     ['[role="menu"]:not(#context-menu [role="menu"])', 'liquify-popup-surface'],
     ['[role="menu"]', 'liquify-menu'],
     ['[role="dialog"]', 'liquify-dialog']
@@ -70,9 +72,74 @@
       document.documentElement.classList.toggle(`liquify-${name}`, (localStorage.getItem(key) || fallback) === enabled);
     }
   }
+  function reconcileArtistSurfaces() {
+    const page = document.querySelector('[data-testid="artist-page"]');
+    const header = page?.querySelector('[data-testid="entity-header"]');
+    if (!header) return;
+    const name = header.querySelector('[data-testid="adaptiveEntityTitle"], [data-testid="entityTitle"], h1')?.textContent.trim();
+    if (!name) return;
+    // The About card is named after the artist in every locale. Preserve its
+    // photograph, when present, and theme only the card's solid background.
+    const about = [...page.querySelectorAll('button[aria-label]')].find(button =>
+      !header.contains(button) && button.getAttribute('aria-label') === name &&
+      (button.querySelector('figure img') || button.style.backgroundImage.includes('url(')));
+    if (about) add(about, 'liquify-artist-about-card');
+    for (const dialog of document.querySelectorAll('dialog[open]')) {
+      if (dialog.getAttribute('aria-label') !== name) continue;
+      add(dialog, 'liquify-artist-dialog');
+      for (const el of dialog.querySelectorAll('div:not(.liquify-artist-dialog-card)')) {
+        const style = getComputedStyle(el);
+        if (style.backgroundImage === 'none' && style.backgroundColor.startsWith('rgb(')) add(el, 'liquify-artist-dialog-card');
+      }
+    }
+    const content = header.querySelector('.main-entityHeader-contentWrapper');
+    if (!content) return;
+    let portrait = content.querySelector('.liquify-artist-portrait');
+    const mode = localStorage.getItem('liquify-artist-bg-mode') || 'theme';
+    const needsPortrait = mode !== 'theme' && !content.querySelector('img:not(.liquify-artist-portrait)');
+    if (!needsPortrait) {
+      portrait?.remove();
+      content.classList.toggle('liquify-artist-has-portrait', false);
+      return;
+    }
+    const nativeImage = about?.querySelector('figure img');
+    const hero = document.querySelector('#main-view .before-scroll-node [data-testid="background-image"]');
+    const source = nativeImage?.currentSrc || nativeImage?.src ||
+      hero?.style.backgroundImage.match(/url\(["']?(.*?)["']?\)/)?.[1];
+    if (!source) {
+      portrait?.remove();
+      content.classList.toggle('liquify-artist-has-portrait', false);
+      return;
+    }
+    if (!portrait) {
+      portrait = document.createElement('img');
+      portrait.className = 'liquify-artist-portrait';
+      portrait.draggable = false;
+      portrait.decoding = 'async';
+      portrait.hidden = true;
+      portrait.onload = () => {
+        portrait.hidden = false;
+        add(content, 'liquify-artist-has-portrait');
+      };
+      portrait.onerror = () => {
+        portrait.hidden = true;
+        content.classList.toggle('liquify-artist-has-portrait', false);
+      };
+      content.prepend(portrait);
+    }
+    if (portrait.alt !== name) portrait.alt = name;
+    if (portrait.getAttribute('src') !== source) {
+      portrait.hidden = true;
+      content.classList.toggle('liquify-artist-has-portrait', false);
+      portrait.src = source;
+    }
+  }
   function reconcile() {
     queued = false;
     scans++;
+    const route = window.Spicetify?.Platform?.History?.location?.pathname || '';
+    document.documentElement.classList.toggle('liquify-browse-page',
+      route === '/search' || /^\/(?:genre|browse)(?:\/|$)/.test(route));
     const root = document.querySelector('.Root__top-container');
     if (root) for (const el of root.children) {
       if (!(el instanceof HTMLElement) || el.className.startsWith('liquify-')) continue;
@@ -150,6 +217,7 @@
       const style = getComputedStyle(el);
       if (style.backgroundImage === 'none' && style.backgroundColor.startsWith('rgb(')) add(el, 'liquify-card-body');
     });
+    reconcileArtistSurfaces();
     add(document.documentElement, 'liquify-compatible');
     window.liquifyCompatibility.lyrics?.();
   }
@@ -168,7 +236,7 @@
     observer.observe(document.documentElement, {childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'id', 'data-testid', 'src']});
     reconcile();
   }
-  window.liquifyCompatibility = {version: '2026.10.19.1', refresh: reconcile, syncSettings, get scans() { return scans; }};
+  window.liquifyCompatibility = {version: '2026.10.21.1', refresh: reconcile, syncSettings, artistSurfaces: reconcileArtistSurfaces, get scans() { return scans; }};
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once: true});
   else start();
 })();
@@ -4916,9 +4984,16 @@
       .liquify-artist-page #main-view .before-scroll-node [data-testid="background-image"] {
         animation-name: liquify-artist-scroll !important;
       }
+      .liquify-artist-theme #main-view .before-scroll-node [data-testid="background-image"] {
+        animation-name: liquify-artist-theme-scroll !important;
+      }
       @keyframes liquify-artist-scroll {
         0% { transform: scale(1); filter: blur(0px) brightness(${brightness / 100}); }
         80%, 100% { transform: scale(1.15); filter: blur(${blur}px) brightness(${brightness / 100}); }
+      }
+      @keyframes liquify-artist-theme-scroll {
+        0% { transform: scale(1); filter: blur(0px) brightness(${brightness / 100}); }
+        25%, 100% { transform: scale(1.05); filter: blur(${blur}px) brightness(${brightness / 100}); }
       }`);
   }
   function ensureArtistScrollEffectApplied() {
@@ -5001,12 +5076,14 @@
     function applyMode(mode) {
       const artist = !!document.querySelector('[data-testid="artist-page"]');
       document.documentElement.classList.toggle('liquify-artist-page', artist);
+      document.documentElement.classList.toggle('liquify-artist-theme', artist && mode === 'theme');
       const url = mode === 'custom' ? localStorage.getItem('liquify-artist-bg-image') :
         mode === 'url' ? localStorage.getItem('liquify-artist-bg-url') : '';
       const image = url ? `url(${JSON.stringify(url)})` : '';
       const css = !artist ? '' : mode === 'none' ? `${selector} { visibility: hidden !important; }` :
         image ? `${selector} { background-image: ${image} !important; background-size: cover; background-position: center; }` : '';
       updateStyle('liquify-artist-background-compat', css);
+      window.liquifyCompatibility?.artistSurfaces?.();
     }
     function applySavedModeIfArtist() { applyMode(localStorage.getItem(modeKey) || 'theme'); }
     function schedule() {
@@ -5945,7 +6022,12 @@ ${parts.join("\n")}
     if (win[PLAY_STATE_KEY]) return;
     win[PLAY_STATE_KEY] = true;
     const sync = () => {
-      const playing = Boolean(win.Spicetify?.Player?.isPlaying?.());
+      let playing = false;
+      try {
+        playing = Boolean(win.Spicetify?.Player?.isPlaying?.());
+      } catch {
+        // Player methods can exist before the playback state is available.
+      }
       document.documentElement.classList.toggle(PLAYING_CLASS, playing);
     };
     sync();

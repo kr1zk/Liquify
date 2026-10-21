@@ -2717,6 +2717,10 @@ p[class*="-text"].encore-text-body-small.encore-internal-color-text-base {
 #main-view [data-testid="entity-header"] + div:empty[style*="background-color"] {
   background: transparent !important;
 }
+/* Artist pages without a hero put their gradient inside the content wrapper. */
+#main-view :is([data-testid="artist-page"], [data-testid="playlist-page"], [data-testid="album-page"]) [data-testid="entity-header"] + div > div:empty[style*="background-color"] {
+  background: transparent !important;
+}
 #main-view div:has(> [data-testid="home-page"]) > div:empty {
   background: transparent !important;
 }
@@ -2746,6 +2750,18 @@ p[class*="-text"].encore-text-body-small.encore-internal-color-text-base {
   border-radius: 20px;
   box-shadow: var(--liquify-shadow);
 }
+/* Browse and genre pages paint a solid wrapper below their header. Let the
+   main panel's translucent tint show through, preserving colored category tiles. */
+.liquify-browse-page #main-view div:has(> .contentSpacing):not([data-testid="entity-header"]),
+.liquify-browse-page #main-view #searchPage,
+.liquify-browse-page #main-view .search-searchCategory-contentArea {
+  background: transparent !important;
+}
+.liquify-browse-page #main-view div:has(> .contentSpacing) > div:empty,
+.liquify-browse-page #main-view div:has(> .contentSpacing) > div:empty::before,
+.liquify-browse-page #main-view div:has(> .contentSpacing) > div:empty::after {
+  background: transparent !important;
+}
 #main-view [data-testid="entity-header"] > div:empty {
   background: transparent !important;
 }
@@ -2763,6 +2779,16 @@ p[class*="-text"].encore-text-body-small.encore-internal-color-text-base {
 }
 .main-card-card { border-radius: 20px; }
 .main-card-card:hover { background: var(--liquify-surface-tint) !important; }
+/* What's new uses list rows with an opaque fill, rather than standard cards.
+   Scope to the release feed grid and keep its cover artwork untouched. */
+#main-view section.contentSpacing [aria-colcount="6"] [data-encore-id="listRow"][aria-labelledby^="listrow-title-spotify:"] {
+  background: var(--liquify-surface-tint) !important;
+  border-radius: 20px;
+  box-shadow: var(--liquify-shadow);
+}
+#main-view section.contentSpacing [aria-colcount="6"] [data-encore-id="listRow"][aria-labelledby^="listrow-title-spotify:"]:is(:hover, :focus-within) {
+  background: rgba(72, 76, 86, .38) !important;
+}
 #Desktop_LeftSidebar_Id > nav > div,
 .Root__right-sidebar > div:not(.LayoutResizer__resize-bar) { border-radius: inherit; }
 /* The resize handles sit outside the panels. Do not clip the outer grid cells. */
@@ -2848,21 +2874,45 @@ p[class*="-text"].encore-text-body-small.encore-internal-color-text-base {
 .liquify-menu { padding: 6px; background: transparent !important; }
 .liquify-menu [role="menuitem"] { border-radius: 12px; }
 .liquify-popup-surface {
-  background: rgba(23, 25, 30, .24) !important;
+  background: rgba(23, 25, 30, .8) !important;
   border-radius: 20px;
   box-shadow: var(--liquify-shadow), 0 12px 40px #0006;
   overflow: hidden;
-}
-.liquify-popup-surface::before {
   backdrop-filter: blur(var(--liquify-backdrop-blur, 32px)) saturate(1.25) !important;
   -webkit-backdrop-filter: blur(var(--liquify-backdrop-blur, 32px)) saturate(1.25) !important;
 }
+.liquify-popup-surface::before {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.liquify-menu :is([role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"]) { border-radius: 9px; }
+.liquify-menu [aria-checked="true"] { background-color: rgba(255, 255, 255, .09); }
 /* Artwork gradients and the sticky toolbar are separate siblings in current Spotify. */
-.liquify-artist-page #main-view .before-scroll-node [data-testid="background-image"] ~ div,
-.liquify-artist-page #main-view .before-scroll-node [data-testid="background-image"] ~ div::before,
-.liquify-artist-page #main-view .before-scroll-node [data-testid="background-image"] ~ div::after,
+#main-view .before-scroll-node [data-testid="background-image"] ~ div:empty,
+#main-view .before-scroll-node [data-testid="background-image"] ~ div:empty::before,
+#main-view .before-scroll-node [data-testid="background-image"] ~ div:empty::after,
 .liquify-artist-page #main-view .before-scroll-node::after {
   background: transparent !important;
+}
+/* Spotify keeps playlist artwork fixed behind the tracks. Fade that layer
+   with its native scroll progress instead of covering it with an opaque tint. */
+#main-view:has([data-testid="playlist-page"]) .before-scroll-node > div:has(> [data-testid="background-image"]) {
+  opacity: clamp(0, calc(1 - var(--scroll, 0) * 4), 1);
+  mask-image: linear-gradient(#000 35%, transparent 100%);
+}
+/* Theme mode blends Spotify's artist banner into the page and fades it out
+   with the header. Mask the wrapper so the image's blur cannot spill over. */
+.liquify-artist-theme #main-view .before-scroll-node > div:has(> [data-testid="background-image"]) {
+  opacity: clamp(0, calc(1 - var(--scroll, 0) * 4), 1);
+  mask-image: linear-gradient(#000 35%, transparent 100%);
+  pointer-events: none;
+}
+/* A banner needs one scroll blur, not another SVG refraction over each box.
+   Keep the glass tint and respect the user's header/action box visibility. */
+.liquify-artist-theme:not(.liquify-no-header-box) #main-view:has(.before-scroll-node [data-testid="background-image"]) [data-testid="entity-header"],
+.liquify-artist-theme:not(.liquify-no-action-box) #main-view:has(.before-scroll-node [data-testid="background-image"]) [data-testid="action-bar"] {
+  backdrop-filter: blur(var(--liquify-glass-blur, 2px)) !important;
+  -webkit-backdrop-filter: blur(var(--liquify-glass-blur, 2px)) !important;
 }
 #main-view [data-testid="topbar"] .main-topBar-background {
   background: rgba(23, 25, 30, .1) !important;
@@ -2967,13 +3017,14 @@ p[class*="-text"].encore-text-body-small.encore-internal-color-text-base {
 
 /* A blurred search form creates a stacking context; lift the whole nav while
    its popup is open so page headers cannot paint over the search history. */
-#global-nav-bar:has(#search-dropdown) { z-index: 100; }
+#global-nav-bar:has([data-top-bar-search][aria-expanded="true"]) { z-index: 100; }
 /* A nested backdrop root would prevent the popup from blurring the page. */
-.liquify-search:has(#search-dropdown) {
+.liquify-search:has([data-top-bar-search][aria-expanded="true"]) {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-#search-dropdown {
+:is(#search-dropdown, #search-suggestions-loading-dropdown) {
+  box-sizing: border-box;
   background: rgba(23, 25, 30, .72) !important;
   border: 0;
   border-radius: 20px;
@@ -2983,7 +3034,7 @@ p[class*="-text"].encore-text-body-small.encore-internal-color-text-base {
   overflow: hidden;
   color: var(--spice-text);
 }
-#search-dropdown > [data-overlayscrollbars] {
+:is(#search-dropdown, #search-suggestions-loading-dropdown) > [data-overlayscrollbars] {
   background: transparent !important;
   box-shadow: none;
 }
@@ -3000,6 +3051,22 @@ p[class*="-text"].encore-text-body-small.encore-internal-color-text-base {
   border-radius: 10px;
   background: var(--liquify-control-tint);
   box-shadow: var(--liquify-shadow);
+}
+/* The search shortcut has its own opaque gradient above the input. */
+#global-nav-bar [data-top-bar-search] ~ [aria-hidden="true"] > span:has(> kbd) {
+  background: var(--liquify-control-tint) !important;
+  border-radius: 8px;
+}
+#global-nav-bar [data-top-bar-search] ~ [aria-hidden="true"] kbd {
+  background: rgba(255, 255, 255, .06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .3);
+}
+[data-tippy-root] [role="tooltip"] {
+  background: rgba(23, 25, 30, .8) !important;
+  border-radius: 8px;
+  box-shadow: var(--liquify-shadow);
+  backdrop-filter: blur(var(--liquify-backdrop-blur, 32px));
+  -webkit-backdrop-filter: blur(var(--liquify-backdrop-blur, 32px));
 }
 
 /* Marketplace owns its tabs and click handlers. Restore only its host above,
@@ -3200,4 +3267,118 @@ p[class*="-text"].encore-text-body-small.encore-internal-color-text-base {
   @media (prefers-reduced-motion: reduce) {
     [data-testid="settings-page"] select::picker-icon { transition: none; }
   }
+}
+
+/* Zoom presets and radio labels are custom controls, not ordinary buttons. */
+[data-testid="settings-page"] .liquify-zoom-controls button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 104px;
+  padding: 12px;
+  border-radius: 15px;
+  background: rgba(23, 25, 30, .72) !important;
+  box-shadow: var(--liquify-shadow);
+}
+.liquify-zoom-controls button > div { background: transparent !important; }
+.liquify-zoom-controls svg rect[fill="black"] { fill: rgba(255, 255, 255, .06); }
+.liquify-zoom-controls svg > g { filter: none; }
+.liquify-zoom-controls [role="radiogroup"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-inline: 0;
+}
+.liquify-zoom-controls [role="radiogroup"]::before { content: none; }
+.liquify-zoom-controls [role="radiogroup"] label {
+  box-sizing: border-box;
+  flex: 1 0 54px;
+  width: auto;
+  min-width: 54px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 8px;
+  border-radius: 10px;
+  background: rgba(23, 25, 30, .72) !important;
+  box-shadow: var(--liquify-shadow);
+  cursor: pointer;
+}
+.liquify-zoom-controls [role="radiogroup"] label > div {
+  width: 100%;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  background: transparent !important;
+}
+.liquify-zoom-controls [role="radiogroup"] label > div > div:last-child {
+  white-space: nowrap;
+  line-height: 1.25;
+}
+.liquify-zoom-controls [role="radiogroup"] label:hover {
+  background: rgba(60, 64, 74, .8) !important;
+}
+.liquify-zoom-controls [role="radiogroup"] label[data-selected="true"],
+[data-testid="settings-page"] .liquify-zoom-controls button:has(svg[data-selected="true"]) {
+  background: rgba(72, 76, 86, .72) !important;
+}
+.liquify-zoom-controls [role="radiogroup"] label[data-selected="true"] > div > div:last-child {
+  color: var(--spice-text);
+  font-weight: 700;
+}
+.liquify-zoom-controls [role="radiogroup"] label:has(input:focus-visible) {
+  outline: 2px solid var(--accent-color, #fff);
+  outline-offset: 3px;
+}
+
+/* Keep the native About card photo and use glass for its otherwise solid fill. */
+[data-testid="artist-page"] .liquify-artist-about-card {
+  background-color: rgba(23, 25, 30, .55) !important;
+  border-radius: 20px;
+  box-shadow: var(--liquify-shadow);
+  overflow: hidden;
+}
+dialog.liquify-artist-dialog {
+  background: rgba(23, 25, 30, .8) !important;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 20px;
+  box-shadow: var(--liquify-shadow), 0 12px 40px #0006;
+  backdrop-filter: blur(var(--liquify-backdrop-blur, 32px)) saturate(1.25);
+  -webkit-backdrop-filter: blur(var(--liquify-backdrop-blur, 32px)) saturate(1.25);
+  overflow: hidden;
+}
+dialog.liquify-artist-dialog ul:has(> li > img) { background: transparent !important; }
+dialog.liquify-artist-dialog .liquify-artist-dialog-card {
+  background-color: rgba(255, 255, 255, .07) !important;
+  border-radius: 12px;
+  box-shadow: var(--liquify-shadow);
+}
+
+/* Artists with a banner still need an identity image when that banner is off.
+   The portrait uses Spotify's existing artist image, never an album cover. */
+[data-testid="artist-page"] .liquify-artist-has-portrait {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.liquify-artist-portrait:not([hidden]) {
+  display: block;
+  flex: 0 0 auto;
+  width: clamp(120px, 18vw, 232px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 20px;
+  box-shadow: var(--liquify-shadow);
+}
+.liquify-artist-portrait[hidden] { display: none; }
+.liquify-artist-has-portrait > .main-entityHeader-adaptiveHeaderContainer {
+  min-width: 0;
+  flex: 1;
+}
+@media (max-width: 900px) {
+  [data-testid="artist-page"] .liquify-artist-has-portrait { gap: 16px; }
+  .liquify-artist-portrait:not([hidden]) { width: 120px; }
 }
