@@ -128,6 +128,7 @@ Video playback always pauses while the Spotify window is hidden.
 - **[kr1zk](https://github.com/kr1zk)** — maintenance of this fork, compatibility fixes, and video background support.
 - **[Sanoojes](https://github.com/sanoojes)** — creator of [Glassify](https://github.com/sanoojes/spicetify-glassify), which inspired Liquify.
 - **[Spicetify](https://spicetify.app/)** — the customization framework that makes this theme possible.
+- <sub>gpt 6 astra</sub>
 
 Original Liquify community: [Discord](https://discord.gg/QRMnrgjhvq).
 
