@@ -13,7 +13,7 @@
 </div>
 
 > **Originally created by [NMW](https://github.com/NMWplays).**
-> This community fork, maintained by [kr1zk](https://github.com/kr1zk), adds local video backgrounds and interface fixes for Spotify 1.3.6.1921.g7086c071a617.
+> This community fork, maintained by [kr1zk](https://github.com/kr1zk), adds local video backgrounds and interface fixes for Spotify 1.3.6.1921.g7086c071a617 and **Spotify 1.3.7.2752.gb0ab39cc0f48**.
 > Visit the [original Liquify repository](https://github.com/NMWplays/Liquify) for NMW's work.
 
 
@@ -64,7 +64,7 @@
 
 ## Installation
 
-You need the **Spotify desktop app** and [Spicetify](https://spicetify.app/). This fork targets **Spotify 1.3.6** with **Spicetify 2.45.3**.
+You need the **Spotify desktop app** and [Spicetify](https://spicetify.app/). This fork targets **Spotify 1.3.6** / **Spotify 1.3.7** with **Spicetify 2.46.3**.
 
 1. [Download this fork](https://github.com/kr1zk/Liquify/archive/refs/heads/main.zip) and extract it.
 2. Place the extracted folder in your Spicetify `Themes` directory and name it `Liquify-main`:
