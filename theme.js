@@ -987,10 +987,22 @@
     "ZQzSUDc81lpJjVOwgkfW": ["panel-section"],
     "ZtJJZN4FTrmJXqmPQIxg": ["artist-gallery-nav-button"],
     "Zzj1XTVI7gvpKjebKqTK": ["artist-pick-comment-row--badge"],
-    "ZZZvR59MO7b3EXPV7ZmC": ["npv-lyrics-card-lines"]
+    "ZZZvR59MO7b3EXPV7ZmC": ["npv-lyrics-card-lines"],
+    // Spotify 1.3.10: ContextMenu v2 (profile menu, "..." app menu, submenus).
+    "ZNdHcrLKbf8H6SBKh71v": ["context-menu-v2"],
+    "Kxn4m_BkzsLT3UCqj50Y": ["context-menu-v2-surface"],
+    "mtbEdxr7a5xkrPujQt24": ["context-menu-v2-submenu"],
+    "GA5iOEAgFAfJmbdhSjda": ["context-menu-item-button"],
+    "fWt0DrbC4hnqcimLzDAl": ["context-menu-v2-divider"],
+    "VCUSdZvuI726eQEhV2Yb": ["context-menu-v2-submenu-trigger"],
+    // Spotify 1.3.10: "Your Updates" inside the profile menu.
+    "k8jsz_SoyJNqbiNfMDcp": ["user-menu-updates"],
+    "M3podY_tMTwmZI1HJvCT": ["user-menu-updates-title"],
+    "c6HPL2rnzeVBbpiUBz5T": ["user-menu-update-row"]
   };
 
   // src/spotifyClassAliases.ts
+  var ENCORE_VERSIONED = /^e-\d{5,}-(.+)$/;
   function installSpotifyClassAliases() {
     const aliases = new Map(Object.entries(classAliases));
     const installed3 = /* @__PURE__ */ new WeakMap();
@@ -999,6 +1011,8 @@
       const needed = /* @__PURE__ */ new Set();
       for (const name of element.classList) {
         for (const alias of aliases.get(name) ?? []) needed.add(alias);
+        const encore = ENCORE_VERSIONED.exec(name);
+        if (encore) needed.add(`e-${encore[1]}`);
       }
       for (const name of previous ?? []) {
         if (!needed.has(name)) element.classList.remove(name);
@@ -12916,6 +12930,18 @@ self.onmessage = (event) => {
     { selector: ".context-menu", blur: 5, brightness: 0.8, before: true },
     { selector: ".library-create-menu", blur: 5, brightness: 0.8, before: true },
     { selector: ".curation-sheet-menu", blur: 5, brightness: 0.8, before: true },
+    // Spotify 1.3.10 ContextMenu v2.
+    // Submenus are rendered inside their parent popover. backdrop-filter on the
+    // parent itself would make it a backdrop root, and the submenu would blur
+    // nothing (it looked solid dark). So popovers get the glass on ::before.
+    // The standalone menu uses its own ::before/::after, so it keeps the glass
+    // on the element itself.
+    { selector: ".context-menu-v2-surface", blur: 5, brightness: 0.8 },
+    { selector: ".context-menu-v2-submenu", blur: 5, brightness: 0.8, before: true },
+    { selector: ".e-popover:has(> .e-menu, > .context-menu-v2)", blur: 5, brightness: 0.8, before: true },
+    // Spicetify Marketplace (::before for the same reason: the sort dropdown lives inside)
+    { selector: ".marketplace-header", blur: 10, before: true },
+    { selector: ".marketplace-sortBox .Dropdown-menu", blur: 5, brightness: 0.8 },
     { selector: ".settings-lossless-confirm-dialog" },
     { selector: ".home-page-content > section" },
     { selector: ".shelf" },

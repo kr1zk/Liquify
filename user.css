@@ -2005,3 +2005,160 @@ img.e-legacy-image.e-legacy-list-row-image.rich-title-shelf-image {
   border-radius: 20px;
   box-shadow: var(--liquify-shadow);
 }
+/* ---------------------------------------------------------------------------
+   Spotify 1.3.10: ContextMenu v2
+   Profile menu, "..." app menu (File / Edit / View / Help) and submenus.
+   --------------------------------------------------------------------------- */
+
+.context-menu-v2-surface,
+.context-menu-v2-submenu,
+.e-popover:has(> .e-menu, > .context-menu-v2) {
+  background-color: transparent !important;
+  border-radius: 20px !important;
+  filter: none !important;
+  box-shadow: var(--liquify-shadow), 0 16px 40px rgba(0, 0, 0, 0.35) !important;
+}
+
+.context-menu-v2 {
+  scrollbar-width: none;
+}
+
+/* Spotify fades the scroll edges with the old solid menu color. */
+.context-menu-v2::before,
+.context-menu-v2::after {
+  background: none !important;
+}
+
+.context-menu-v2 .context-menu-item-button {
+  --encore-list-row-hover-bg: rgba(255, 255, 255, 0.08);
+  --encore-list-row-active-bg: rgba(255, 255, 255, 0.14);
+}
+
+.context-menu-v2-submenu-trigger[aria-expanded=true] {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.context-menu-v2-divider,
+.context-menu-v2 [role=separator] {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* "Your Updates" inside the profile menu */
+.user-menu-updates {
+  scrollbar-width: none;
+}
+
+.user-menu-update-row {
+  border-radius: 14px;
+}
+
+.user-menu-update-row img {
+  border-radius: 50%;
+}
+
+/* ---------------------------------------------------------------------------
+   Spicetify Marketplace
+   --------------------------------------------------------------------------- */
+
+.marketplace-header {
+  background-color: transparent;
+  border-radius: 20px;
+  box-shadow: var(--liquify-shadow);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
+
+.marketplace-tabBar-headerItemLink {
+  border-radius: 14px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.marketplace-tabBar-headerItemLink:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.marketplace-tabBar-active {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: var(--liquify-shadow);
+}
+
+.searchbar-bar,
+.marketplace-header-icon-button,
+.marketplace-sortBox .Dropdown-control {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  box-shadow: var(--liquify-shadow);
+  color: var(--spice-text) !important;
+}
+
+.marketplace-header-icon-button:hover,
+.marketplace-sortBox .Dropdown-control:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.searchbar-bar {
+  padding: 10px 16px;
+}
+
+.marketplace-grid .main-card-card {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 20px;
+  box-shadow: var(--liquify-shadow);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease;
+}
+
+.marketplace-grid .main-card-card:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: scale(1.02);
+}
+
+.marketplace-grid .main-card-imageContainer,
+.marketplace-grid .main-cardImage-imageWrapper,
+.marketplace-grid .main-cardImage-image {
+  border-radius: 14px;
+}
+
+.marketplace-grid .main-card-draggable .main-card-cardMetadata li.marketplace-card__tag,
+.marketplace-grid .main-card-draggable .main-card-cardMetadata .marketplace-card__tags-more-btn {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.marketplace-card--installed {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.marketplace-card-type-heading {
+  color: var(--spice-text);
+}
+
+.marketplace-sortBox .Dropdown-control {
+  padding: 8px 36px 8px 16px;
+}
+
+.marketplace-sortBox .Dropdown-root.is-open .Dropdown-control {
+  border-radius: 999px !important;
+}
+
+.marketplace-sortBox .Dropdown-menu {
+  background-color: transparent;
+  border-radius: 16px !important;
+  box-shadow: var(--liquify-shadow), 0 16px 40px rgba(0, 0, 0, 0.35);
+  margin-top: 6px;
+  padding: 4px;
+  scrollbar-width: none;
+}
+
+.marketplace-sortBox .Dropdown-option {
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+.marketplace-sortBox .Dropdown-option:hover,
+.marketplace-sortBox .Dropdown-option.is-selected {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--spice-text);
+}
