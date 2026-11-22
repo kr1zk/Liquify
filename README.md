@@ -33,16 +33,16 @@
 | --- | --- |
 | Spotify Desktop | **1.3.10** (tested on 1.3.10.2586, Windows) |
 | Spicetify | 2.46.7 |
-| Lyrics extension | **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** |
+| Lyrics extension | **[Liquid Lyrics for Spicetify](https://github.com/kr1zk/Liquid-Lyrics)** (recommended) or [Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics) |
 
 Other Spotify versions may work, but they are not tested.
 
 ## Lyrics
 
 > [!IMPORTANT]
-> **Use [Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics) with this port.** Install it from the Spicetify Marketplace.
+> **Use [Liquid Lyrics for Spicetify](ССЫЛКА)**, a port of NMW's [Liquid Lyrics](https://github.com/NMWplays/Liquid-Lyrics), the official lyrics extension for Liquify.
 >
-> Do **not** use Liquid Lyrics for now. The original Liquify recommends it, but it is not adapted to this port yet.
+> [Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics) from the Spicetify Marketplace also works. The original Liquid Lyrics (made for SpotiKit) does not work with this port (untested).
 
 ## Installation
 
@@ -108,6 +108,7 @@ This creates `theme.js`. Edit `user.css` directly.
 
 - **[NMW](https://github.com/NMWplays)**: creator of [Liquify](https://github.com/NMWplays/Liquify)
 - **[kr1zk](https://github.com/kr1zk/Liquify)**: separate Spicetify fork of an earlier Liquify version
+- **[Liquid Lyrics for Spicetify](https://github.com/kr1zk/Liquid-Lyrics)**: Spicetify port of NMW's Liquid Lyrics
 - **[Sanoojes](https://github.com/sanoojes)**: creator of [Glassify](https://github.com/sanoojes/spicetify-glassify), which inspired Liquify
 - **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** and **[Spicetify](https://spicetify.app/)**
 
