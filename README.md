@@ -47,7 +47,7 @@ Other Spotify versions may work, but they are not tested.
 ## Installation
 
 1. Download the latest release (or the repository as ZIP) and extract it.
-2. Put the `Liquify-Spicetify` folder in your Spicetify `Themes` directory:
+2. Put the `Liquify-main` folder in your Spicetify `Themes` directory:
 
    | Platform | Themes directory |
    | --- | --- |
@@ -59,8 +59,7 @@ Other Spotify versions may work, but they are not tested.
 3. Run:
 
    ```shell
-   spicetify config current_theme Liquify-Spicetify color_scheme Base
-   spicetify config inject_css 1 inject_theme_js 1 replace_colors 0
+   spicetify config current_theme Liquify-main
    spicetify apply
    ```
 
@@ -69,7 +68,7 @@ Other Spotify versions may work, but they are not tested.
 <details>
 <summary><strong>Updating</strong></summary>
 
-Replace the files in the `Liquify-Spicetify` folder with the new ones and run `spicetify apply`.
+Replace the files in the `Liquify-main` folder with the new ones and run `spicetify apply`.
 
 </details>
 
@@ -108,7 +107,6 @@ This creates `theme.js`. Edit `user.css` directly.
 ## Credits
 
 - **[NMW](https://github.com/NMWplays)**: creator of [Liquify](https://github.com/NMWplays/Liquify)
-- **[YOUR_GITHUB](https://github.com/YOUR_GITHUB)**: Spicetify port
 - **[kr1zk](https://github.com/kr1zk/Liquify)**: separate Spicetify fork of an earlier Liquify version
 - **[Sanoojes](https://github.com/sanoojes)**: creator of [Glassify](https://github.com/sanoojes/spicetify-glassify), which inspired Liquify
 - **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** and **[Spicetify](https://spicetify.app/)**
