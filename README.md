@@ -4,7 +4,7 @@
 
 **A liquid glass Spotify theme by NMW, ported from SpotiKit to Spicetify.**
 
-[![Spotify 1.3.9](https://img.shields.io/badge/Spotify-1.3.9-1DB954?logo=spotify&logoColor=white)](https://www.spotify.com/download/)
+[![Spotify 1.3.10](https://img.shields.io/badge/Spotify-1.3.10-1DB954?logo=spotify&logoColor=white)](https://www.spotify.com/download/)
 [![Spicetify 2.46.7](https://img.shields.io/badge/Spicetify-2.46.7-F5C2E7)](https://spicetify.app/)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue)](LICENSE.txt)
 
@@ -31,7 +31,7 @@
 
 | | Version |
 | --- | --- |
-| Spotify Desktop | **1.3.9** (tested on 1.3.9.2055, Windows) |
+| Spotify Desktop | **1.3.10** (tested on 1.3.10.2586, Windows) |
 | Spicetify | 2.46.7 |
 | Lyrics extension | **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** |
 
