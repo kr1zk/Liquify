@@ -1,139 +1,123 @@
 <div align="center">
 
-# Liquify
+# Liquify for Spicetify
 
-**A glass-inspired Spotify theme with rounded controls and custom video backgrounds.**
+**A liquid glass Spotify theme by NMW, ported from SpotiKit to Spicetify.**
 
-[![Spotify 1.3.6](https://img.shields.io/badge/Spotify-1.3.6-1DB954?logo=spotify&logoColor=white)](https://www.spotify.com/download/)
-[![Spicetify](https://img.shields.io/badge/Spicetify-2.45.3-F5C2E7)](https://spicetify.app/)
+[![Spotify 1.3.9](https://img.shields.io/badge/Spotify-1.3.9-1DB954?logo=spotify&logoColor=white)](https://www.spotify.com/download/)
+[![Spicetify 2.46.7](https://img.shields.io/badge/Spicetify-2.46.7-F5C2E7)](https://spicetify.app/)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue)](LICENSE.txt)
 
-[Installation](#installation) · [Video backgrounds](#video-backgrounds) · [Credits](#credits)
+[Installation](#installation) · [Lyrics](#lyrics) · [Known issues](#known-issues) · [Building](#building-from-source) · [Credits](#credits)
+
+![Preview](preview.png)
 
 </div>
 
-> **Originally created by [NMW](https://github.com/NMWplays).**
-> This community fork, maintained by [kr1zk](https://github.com/kr1zk), adds local video backgrounds and interface fixes for Spotify 1.3.6.1921.g7086c071a617 and **Spotify 1.3.7.2752.gb0ab39cc0f48**.
-> Visit the [original Liquify repository](https://github.com/NMWplays/Liquify) for NMW's work.
-
-
-*Preview from the original Liquify theme by NMW. This fork includes the additions described below.*
-
+> **Liquify was created by [NMW](https://github.com/NMWplays).**
+> The current version of Liquify is made for [SpotiKit](https://github.com/NMWplays/SpotiKit). This is a port of that version
+> ([NMWplays/Liquify @ 7548edd](https://github.com/NMWplays/Liquify/tree/7548edd08447fbe84ec0fa19e9e1d206f01d366a))
+> to Spicetify. It is an unofficial community port, not supported by NMW.
 
 ## Features
 
-**Liquify offers:**
+- Liquid glass panels, playbar, menus and dialogs
+- Liquify Settings: backgrounds, accent and dynamic colors, fonts, player layout, animations
+- Animated backgrounds (Kawarp), photo and video backgrounds from your computer
+- Cover art effects, visualizers and a "next song" card
+- Uses Spotify's own window buttons
 
-- Many customization options
--  `Beatiful Lyrics`, `Spicy Lyrics` and `Lucid Lyrics` are supported by default
-- Video backgrounds
-- Beautiful dynamic colors (Just enable dynamic button colors in the settings and your good to go)
-- Modern, rounded UI
-- And much more!
+## Requirements
 
-***⚠️IMPORTANT: TO MAKE YOUR THEME WORK PERFECTLY, YOU NEED TO INSTALL LIQUID LYRICS FROM SPICETIFY MARKETPLACE, OR DIRECTLY FROM [LIQUID LYRICS](https://github.com/NMWplays/Liquid-Lyrics) GITHUB.***
+| | Version |
+| --- | --- |
+| Spotify Desktop | **1.3.9** (tested on 1.3.9.2055, Windows) |
+| Spicetify | 2.46.7 |
+| Lyrics extension | **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** |
 
-<sub> these steps are not necessary, if you already have liquid lyrics installed</sub>
+Other Spotify versions may work, but they are not tested.
 
-## Theme screenshots
+## Lyrics
 
-<details>
-<summary>Click to watch screenshots</summary>
-<img width="1919" height="1029" alt="Homescreen" src="https://github.com/user-attachments/assets/a7d50e6e-56be-4a8b-8ea6-8835655d4cdf" />
-
-<img width="1919" height="1029" alt="Playlist" src="https://github.com/user-attachments/assets/5375a463-10a4-428e-8e5c-f43d76e03509" />
-
-<img width="1919" height="1030" alt="Search" src="https://github.com/user-attachments/assets/71d1c7a5-bca6-47d3-880c-8c0e85c45bce" />
-
-<img width="1919" height="1030" alt="Artist-Page" src="https://github.com/user-attachments/assets/60151e06-8a6a-4548-a882-1c267c18e7ca" />
-
-<img width="1919" height="1028" alt="Artist-Page2" src="https://github.com/user-attachments/assets/fa9bdb4f-666e-4380-9ee3-2da6b33be730" />
-
-<img width="1919" height="1030" alt="Liquify-Settings" src="https://github.com/user-attachments/assets/0ab96146-4868-468c-8a22-7cb03fa992c1" />
-
-<img width="1919" height="1030" alt="Popup" src="https://github.com/user-attachments/assets/59b2f2e9-b273-4f2a-9d06-7e562be21f8d" />
-
-<img width="1919" height="1029" alt="Settings" src="https://github.com/user-attachments/assets/f37cfbef-7d3e-4ed4-bab5-0dfeae4362aa" />
-
-<img width="1919" height="1030" alt="Fullscreen" src="https://github.com/user-attachments/assets/7b147a4f-6f48-4123-bf65-96b4a94d44e0" />
-
-</details>
-
-
-
+> [!IMPORTANT]
+> **Use [Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics) with this port.** Install it from the Spicetify Marketplace.
+>
+> Do **not** use Liquid Lyrics for now. The original Liquify recommends it, but it is not adapted to this port yet.
 
 ## Installation
 
-You need the **Spotify desktop app** and [Spicetify](https://spicetify.app/). This fork targets **Spotify 1.3.6** / **Spotify 1.3.7** with **Spicetify 2.46.3**.
-
-1. [Download this fork](https://github.com/kr1zk/Liquify/archive/refs/heads/main.zip) and extract it.
-2. Place the extracted folder in your Spicetify `Themes` directory and name it `Liquify-main`:
+1. Download the latest release (or the repository as ZIP) and extract it.
+2. Put the `Liquify-Spicetify` folder in your Spicetify `Themes` directory:
 
    | Platform | Themes directory |
    | --- | --- |
    | Windows | `%APPDATA%\spicetify\Themes\` |
    | Linux / macOS | `~/.config/spicetify/Themes/` |
 
-   The folder should contain `color.ini`, `user.css`, `theme.js`, and the complete `assets` directory. Keep the assets included: they provide local video conversion.
+   The folder must contain `theme.js`, `user.css` and `color.ini`.
 
-3. Run these commands in your terminal:
+3. Run:
 
    ```shell
-   spicetify config current_theme Liquify-main
-   spicetify apply
-   
-   spicetify config overwrite_assets 1 (required for video background support)
+   spicetify config current_theme Liquify-Spicetify color_scheme Base
+   spicetify config inject_css 1 inject_theme_js 1 replace_colors 0
    spicetify apply
    ```
 
-Open **Liquify Settings** in Spotify to customize the theme.
+4. Open Spotify and click the Liquify gear in the top bar to open **Liquify Settings**.
 
 <details>
-<summary><strong>Updating an existing installation</strong></summary>
+<summary><strong>Updating</strong></summary>
 
-Replace the theme files and the `assets` directory with the latest files from this fork, then run `spicetify apply` again.
+Replace the files in the `Liquify-Spicetify` folder with the new ones and run `spicetify apply`.
+
+</details>
+
+<details>
+<summary><strong>Uninstalling</strong></summary>
+
+```shell
+spicetify config current_theme ""
+spicetify apply
+```
 
 </details>
 
 ## Video backgrounds
 
-Give Spotify an animated background using a video from your computer.
+Open **Liquify Settings → Background** and add a photo or video from your computer. Videos play in formats that Spotify can decode by itself (WebM / VP9 is the safest choice). There is no built-in converter in this port.
 
-1. Open **Liquify Settings → Background → Custom**.
-2. Under **Background Library**, click **Add photos or videos** and select an MP4 or WebM file.
-3. Click its thumbnail to activate it, then adjust **Background Blur** and **Background Brightness**.
+## Known issues
 
-Videos loop without sound, and your selected background is saved between sessions. Photos are still supported.
+- Tested on Spotify **1.3.9**. There are some small visual bugs (alignment, spacing, some elements without glass). Nothing breaks the client.
+- Some texts in the settings still mention SpotiKit or Liquid Lyrics. They come from the original theme.
 
-Two optional controls let you pause the background:
+Found a bug? Open an issue with your Spotify and Spicetify versions and a screenshot.
 
-- **Pause video when Spotify is not the active window**
-- **Pause video when music is paused**
+## Building from source
 
-Video playback always pauses while the Spotify window is hidden.
+Requires Node.js 18+.
 
-<details>
-<summary><strong>Formats, conversion, and saved backgrounds</strong></summary>
+```shell
+npm ci
+npm run build
+```
 
-- Compatible MP4 and WebM files play directly. MP4 files that Spotify cannot decode are automatically converted to WebM using the bundled converter.
-- Conversion runs locally on your computer. Your video is not uploaded, and the original file is left unchanged.
-- Automatic conversion accepts MP4 files up to **256 MiB** and produces video at up to **1080p / 30 FPS**.
-- Background photos and videos are stored locally. They are not included when exporting your theme configuration, so import them separately on another device.
-
-</details>
+This creates `theme.js`. Edit `user.css` directly.
 
 ## Credits
 
-- **[NMW](https://github.com/NMWplays)** — creator of the [original Liquify theme](https://github.com/NMWplays/Liquify).
-- **[kr1zk](https://github.com/kr1zk)** — maintenance of this fork, compatibility fixes, and video background support.
-- **[Sanoojes](https://github.com/sanoojes)** — creator of [Glassify](https://github.com/sanoojes/spicetify-glassify), which inspired Liquify.
-- **[Spicetify](https://spicetify.app/)** — the customization framework that makes this theme possible.
-- <sub>gpt 6 astra</sub>
+- **[NMW](https://github.com/NMWplays)**: creator of [Liquify](https://github.com/NMWplays/Liquify)
+- **[YOUR_GITHUB](https://github.com/YOUR_GITHUB)**: Spicetify port
+- **[kr1zk](https://github.com/kr1zk/Liquify)**: separate Spicetify fork of an earlier Liquify version
+- **[Sanoojes](https://github.com/sanoojes)**: creator of [Glassify](https://github.com/sanoojes/spicetify-glassify), which inspired Liquify
+- **[Spicy Lyrics](https://github.com/Spikerko/spicy-lyrics)** and **[Spicetify](https://spicetify.app/)**
 
 Original Liquify community: [Discord](https://discord.gg/QRMnrgjhvq).
 
 ## License
 
-Distributed under the [GNU Affero General Public License v3.0](LICENSE.txt).
+Distributed under the [GNU Affero General Public License v3.0](LICENSE.txt), the same license as the original Liquify.
+This port is a modified version of NMW's work. The changes are the Spicetify adaptation made in 2026.
 
-The bundled video converter includes third-party components with their own licenses and source references in [`assets/liquify-video`](assets/liquify-video/).
+`theme.js` bundles [@kawarp/core](https://www.npmjs.com/package/@kawarp/core) and [react-colorful](https://github.com/omgovich/react-colorful) (both MIT). See [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).
